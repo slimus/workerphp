@@ -116,6 +116,11 @@ class JobManager
                 // Error
                 throw new \RuntimeException("pcntl_fork error.");
             } elseif ($pid) {
+                $s = null;
+                $pid = pcntl_wait($s);
+                if (!$pid) {
+                    throw new \RuntimeException("pcntl_wait error.");
+                }
                 exit;
             }
 
